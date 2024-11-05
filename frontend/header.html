@@ -1,0 +1,81 @@
+{{define "header" }}
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <a href="/"><img class="logo" src="../static/images/logo.png"></a>
+        </div>
+        <div class="profile">
+            {{if .LoggedInUser}}
+            <div class="dropdown">
+                <button class="barButtons dropdown-item ">
+                  Hi, {{ .LoggedInUser }}
+                </button>
+                <div class="dropdown-content">
+                  <a href="/logout" class="dropdown-item barButtons">Log out</a>
+                </div>
+              </div>
+            {{else}}
+                <div class="login">
+                    <a onclick="showPopup('loginPopup')">
+                        Login
+                        <img  class="sign" src="../static/images/sign-in.png">
+                    </a>
+                </div>
+                <div class="signup">
+                    <a onclick="showPopup('signupPopup')">
+                        Register
+                        <img  class="sign" src="../static/images/register.png">
+                    </a>
+                </div>
+            {{end}}
+        </div>
+        
+        
+    </div>
+</div>
+
+<div class="popup">
+    <div id="loginPopup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('loginPopup')">&times;</span>
+            <h2 class="form-name">Login to continue</h2>
+            <form action="/login" method="POST" class="form">
+                <div class="input-container">
+                    <input class="content-name" type="text" id="username" name="username" required>
+                    <label for="username"><span class="label-name">Username</span></label>
+                </div>
+                <div class="input-container">
+                    <input class="content-name" type="password" id="password" name="password" required>
+                    <label for="password"><span class="label-name">Password</span></label>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="signupPopup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('signupPopup')">&times;</span>
+            <h2 class="form-name">Registration</h2>
+            <form action="/register" method="POST" class="form">
+                <div class="input-container">
+                    <input class="content-name" type="email" id="email" name="email" required>
+                    <label for="email"><span class="label-name">Email</span></label>
+                </div>
+                <div class="input-container">
+                    <input class="content-name" type="text" id="username" name="username" required>
+                    <label for="username"><span class="label-name">Username</span></label>
+                </div>
+                <div class="input-container">
+                    <input class="content-name" type="password" id="password" name="password" required>
+                    <label for="password"><span class="label-name">Password</span></label>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Join">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{end}}

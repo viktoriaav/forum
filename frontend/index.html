@@ -1,0 +1,70 @@
+{{define "index" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/reset.css">
+    <link rel="stylesheet" href="./static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <title>Forum</title>
+</head>
+<body>
+    {{ template "header" .Header}}
+    <div class="body">
+        <div class="discussion">
+            <a href="/create-post">
+                Create a post
+            </a>
+        </div>
+        <div class="post-wrapper">
+            <div class="category-buttons categories">
+                <button class="category-button category" data-category="all" onclick="filterPosts('category', 'all')">All Categories</button>
+                {{range .Categories}}
+                    <button class="category-button category" data-category="{{.Category}}" onclick="filterPosts('category', '{{.Category}}')">{{.Category}}</button>
+                {{end}}
+                {{if .Header.LoggedInUser}}
+                <button class="category-button category" id="my-likes-button" onclick="filterPosts('filter', 'my-likes')">My Likes</button>
+                <button class="category-button category" id="my-posts-button" onclick="filterPosts('filter', 'my-posts')">My Posts</button>
+                {{end}}
+            </div>
+            <div class="all-posts" id="all-posts">
+                <h2 class="posts">Posts</h2>
+                {{range .Posts}}
+                <div class="post" data-username="{{.Username}}" data-category="{{.PostCategory}}">
+                    <div class="post-category">
+                        <span>{{.PostCategory}}</span>
+                    </div>
+                    <a href="/post/{{.PostID}}" class="title">{{.Title}} by: {{.Username}}</a>
+                    <p class="content">{{.Content}}</p>
+                    <div class="reactions">
+                        <form id="reaction-form" action="/update-reaction" method="POST">
+                            <div class="like-dislike-container">
+                                <input type="hidden" name="targetType" value="post">
+                                <input type="hidden" name="targetID" value="{{ .PostID }}">
+                                <button type="submit" name="action" value="0" class="like-button">
+                                    <img src='../static/images/like.png' class="icon">
+                                    {{.Likes}}
+                                </button>
+                                <button type="submit" name="action" value="1" class="dislike-button">
+                                    <img src='../static/images/dislike.png' class="icon">
+                                    {{.Dislikes}}
+                                </button>                                
+                            </div>
+                        </form>
+                        <a class="comments" href="/{{.PostID}}"></a>
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        
+    <script src="../static/scripts.js">
+    </script>
+</body>
+</html>
+{{ end}}

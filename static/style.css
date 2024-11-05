@@ -1,0 +1,564 @@
+body{
+    font-family: 'Inter', sans-serif;
+    height: 900px;
+}
+.container{
+    background: #FFEDD4;
+}
+.header{
+    width: 1280px;
+    margin: 0 auto;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+}
+.profile{
+    display: inline-flex;
+    height: 37px;
+    padding: 10px;
+    gap: 10px;
+    margin-right: 90px;
+}
+.logo{
+    width: 85px;
+    height: 50px;
+    margin-left: 22px;
+}
+.sign{
+    display: flex;
+    padding: 2px;
+    gap: 10px;
+    height: 24px;
+    width: 24px;
+}
+.login a, .signup a, .discussion a, .create-form .submit, .comment-form .submit{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 3px;
+    color: #1D2B19;
+    gap: 10px;
+}
+.login, .signup{
+    color: #1D2B19;
+    font-weight: 700;
+    text-underline-position: under;
+    font-size: 14px;
+    padding: 10px;
+    margin: 0 30px 0 30px;
+}
+#loginPopup, #signupPopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffac;
+    z-index: 1000; 
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1F5B4B;
+    padding: 20px;
+    border-radius: 30px;
+    width: 400px;
+    height: 400px;
+}
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #FFEDD4;
+}
+.form-name{
+  margin-top: 10px;
+  text-align: center;
+  color: #FFEDD4;
+  font-size: 24px;
+  height: fit-content;
+  padding-top: 20px;
+}
+.form {
+    position: relative;
+    width: 400px;
+    height: 48px;
+    margin-top: 50px;
+}
+  
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+  
+.form .content-name {
+    width: 100%;
+    height: 30px;
+    padding-top: 15px;
+    z-index: 2;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    background-color: transparent;
+    color: #FFEDD4;
+}
+  
+.form label {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid #FFEDD4;
+    overflow: hidden;
+    color: #FFEDD4 ;
+}
+  
+.form label:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px solid #FFEDD4;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+}
+  
+.label-name {
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+.content-name:focus{
+    color: #FFEDD4;
+}
+  
+.form input:focus + label .label-name,
+.form input:valid + label .label-name {
+    transform: translateY(-150%);
+    font-size: 14px;
+    color: #FFEDD4;
+    caret-color: #FFEDD4;
+}
+  
+.form input:focus + label:after,
+.form input:valid + label:after {
+    transform: translateX(0);
+}
+  
+.submit{  
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+.submit input{
+    margin: 0;
+    padding-bottom: 3px;
+    border: none;
+    border-bottom: 2px solid #FFEDD4;
+    cursor: pointer;
+    color: #FFEDD4;
+    font-size: 24px;
+    font-weight: 400;
+    height: fit-content;
+    width: fit-content;
+    outline: none;
+    background-color: transparent;
+}
+
+.discussion {
+  margin: 50px;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+}
+
+.body{
+  width: 1280px;
+  margin: 0 auto;
+  height: 900px;
+  display: flex;
+  flex-direction: column;
+}
+.discussion a{
+  font-size: 24px;
+  margin: 20px 10px;
+}
+.post-select {
+  appearance: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(37, 109, 90, 0.41);
+  padding: 10px 25px 10px 5px;
+  background-image: url('../static/images/select-arrow.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 20px 10px;
+}
+
+.error-block{
+    width: 1280px;
+    margin: 100px;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sad-error{
+    width: 200px;
+    height: 200px;
+    margin-right: 50px;
+}
+.error-body p,
+.error-body a {
+    display: block;
+    margin-bottom: 25px; 
+}
+.error-body{
+    align-items: center;
+}
+.error-code{
+    font-size: 48px;
+}
+.error-message{
+    font-size: 30px;
+}
+.error-button{
+    color: black;
+    font-weight: 500;
+    text-underline-position: under;
+}
+.dropdown-content {
+    margin-top: 0px;
+    border-radius: 10spx;
+    display: none;
+    position: absolute;
+    background-color: #FFEDD4;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-right: 20px;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-item {
+    display: flex;
+    padding: 10px;
+    text-decoration: underline;
+    border: none;
+    background: none;
+    text-underline-position: under;
+    font-size: 16px;
+    justify-content: center;
+  }
+
+  .dropdown-content a{
+    color: black;
+  }
+.start-discussion{
+    height: 45px;
+    width: fit-content;
+    margin: 100px 0px 100px 10px;
+}
+.start-discussion span{
+    font-size: 36px;
+}
+.create-form {
+    display: flex;
+    width: 1280px;
+    justify-content: center;
+    align-items: center;
+}
+.create-form input[type="text"]{
+    margin-bottom: 50px;
+    border: none;
+    background-color: rgba(37, 109, 90, 0.41);
+    padding: 30px;
+    font-size: 24px;
+    width: 100%;
+}
+.create-form .submit, .comment-form .submit{
+    border: none;
+    background: none;
+    text-decoration: underline;
+    text-underline-position: under;
+    font-size: 24px;
+    margin: 20px 10px;
+    justify-content: end;
+    margin-right: 26%;
+    width: fit-content;
+}
+.footer{
+    display: block;
+}
+.create-form #content{
+    height: 100px;
+}
+.post-wrapper{
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 50px 0px 50px;
+}
+.categories{
+    display: flex;
+    flex-direction: column ;
+    background-color: rgba(37, 109, 90, 0.41);
+    width: fit-content;
+    height: fit-content;
+    padding: 20px 35px 30px 10px;
+}
+.category{
+    padding: 10px 20px 10px 5px;
+    display: flex;
+    background-color: #D2E4D6;
+    margin-bottom: 20px;
+    width: 150px;
+    border: none;
+    cursor: pointer;
+}
+.categories a{
+    width: 70%;
+    text-decoration: none;
+    color: black;
+}
+.all-posts{
+    padding-right: 50px;
+}
+.posts, 
+.all-comments{
+    font-size: 30px;
+    text-decoration: underline;
+    text-underline-position: under;
+    transform: translateY(-100%);
+}
+.post, 
+.info-post {
+    background-color: rgba(37, 109, 90, 0.41);
+    width: 731px;
+    height: 130px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.post-category span {
+    background-color: #FFEDD4;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    transform: translateY(-50%);
+    right: 5%;
+}
+.title{
+    color: black;
+    text-decoration: underline;
+    text-underline-position: under;
+    font-size: 24px;
+}
+.post .content, 
+.info-post .content,
+.comment .content{
+    margin: 20px 10px;
+    font-size: 20px;
+}
+.post .reactions, 
+.info-post .reactions{
+    display: flex;
+    height: 36px;
+    width: 102px;
+    background-color: #D2E4D6;
+    position: absolute;
+    transform: translateY(50%);
+    right: 5%;
+}
+.likes, .dislikes, .comments{
+    background-color: #D2E4D6;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    width: 34px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 15px;
+}
+.comments{
+    background-image: url('../static/images/comment.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px;
+}
+.post-page{
+    width: 1280px;
+    margin: 0 auto;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.create-post{
+    width: 1280px;
+    margin: 0 auto;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+.back-home{
+    color: black;
+    height: 30px;
+    margin-top: 50px;
+    width: 731px;
+    text-align: left;
+}
+
+.post-comments{
+    position: relative;
+}
+.info-post,
+.all-comments{
+    margin-top: 100px;
+}
+.comment {
+    background-color: rgba(37, 109, 90, 0.41);
+    width: 731px;
+    height: 90px;
+    margin-bottom: 40px;
+    position: relative;
+}
+.info-post.reaction, .comment .reactions{
+    display: flex;
+    height: 36px;
+    width: 68px;
+    background-color: #D2E4D6;
+    position: absolute;
+    transform: translateY(-40%);
+    right: 5%;
+}
+
+.category-choose{
+    display: flex;
+    width: 956px;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 20px;
+}
+/* checkbox-rect */
+.checkbox-rect input[type="checkbox"] {
+    display: none;
+  }
+  .checkbox-rect input[type="checkbox"] + label {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  .checkbox-rect input[type="checkbox"]:hover + label:hover {
+    color: rgb(23, 86, 228);
+  }
+  .checkbox-rect input[type="checkbox"]:hover + label:before {
+    background: #50565a;
+    box-shadow: inset 0px 0px 0px 2px #f7f2f2;
+  }
+  .checkbox-rect input[type="checkbox"] + label:last-child {
+    margin-bottom: 0;
+  }
+  .checkbox-rect input[type="checkbox"] + label:before {
+    content: "";
+    display: block;
+    width: 1.4em;
+    height: 1.4em;
+    border: 1px solid #343a3f;
+    border-radius: 0.2em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-transition: all 0.2s, red 0.2s ease-in-out;
+    transition: all 0.2s, red 0.2s ease-in-out;
+    background: #f3f3f3;
+  }
+  .checkbox-rect input[type="checkbox"]:checked + label:before {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 0.2em;
+    border: 2px solid #fff;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    background: #50565a;
+    box-shadow: 0 0 0 1px #000;
+  }
+  /* checkbox-rect end */
+
+.login-to{
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+}
+.comment-form input[type="text"]{
+    border: none;
+    background-color: rgba(37, 109, 90, 0.41);
+    padding: 15px;
+    font-size: 18px;
+    width: 70%;
+}
+.comment-form .submit{
+    border: none;
+    background: none;
+    text-decoration: underline;
+    text-underline-position: under;
+    font-size: 18px;
+    justify-content: end;
+    margin-right: 26%;
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 41%;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.reactions form {
+    display: flex;
+    align-items: center;
+}
+.like-dislike-container{
+    display: flex;
+    height: 36px;
+}
+.like-dislike-container button{
+    background: none;
+    border: none;
+    background-color: #D2E4D6;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.like-dislike-container img{
+    height: 20px;
+    width: 20px;
+}

@@ -1,0 +1,93 @@
+{{define "post"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/reset.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <title>Forum</title>
+</head>
+<body>
+    {{ template "header" .Header}}
+    <div class="post-page">
+        <div class="back-home">
+            <a href="/" class="back-home">Back on Home Page</a>
+        </div>
+        <div class="post-container">
+            <div class="info-post">
+                <div class="post-category">
+                    <span>{{ .Post.PostCategory}}</span>
+                </div>
+                <p class="title">{{ .Post.Title}} by: {{ .Post.Username}}</p>
+                <p class="content">{{.Post.Content}}</p>
+                <div class="reactions">
+                    <form id="reaction-form" action="/update-reaction" method="POST">
+                        <div class="like-dislike-container">
+                            <input type="hidden" name="targetType" value="post">
+                            <input type="hidden" name="targetID" value="{{ .Post.PostID }}">
+                            <button type="submit" name="action" value="0" class="like-button">
+                                <img src='../static/images/like.png' class="icon">
+                                {{.Post.Likes}}
+                            </button>
+                            <button type="submit" name="action" value="1" class="dislike-button">
+                                <img src='../static/images/dislike.png' class="icon">
+                                {{.Post.Dislikes}}
+                            </button>                                
+                        </div>
+                    </form>
+                    <a class="comments" href="#post-comments"></a>
+                </div>
+            </div>
+            <div class="post-comments" id="post-comments">
+                <p class="all-comments">Comments</p>
+                {{ range .Comments }}
+                    <div class="comment">
+                        <p class="title"> by: {{ .Username}}</p>
+                        <p class="content">{{ .Content }}</p>
+                        <div class="reactions">
+                            <form action="/update-reaction" method="POST">
+                                <div class="like-dislike-container">
+                                    <input type="hidden" name="targetType" value="comment">
+                                    <input type="hidden" name="targetID" value="{{ .CommentID }}">
+                                    <button type="submit" name="action" value="0" class="like-button">
+                                        <img src='../static/images/like.png' class="icon">
+                                        {{.Likes}}
+                                    </button>
+                                    <button type="submit" name="action" value="1" class="dislike-button">
+                                        <img src='../static/images/dislike.png' class="icon">
+                                        {{.Dislikes}}
+                                    </button>                                
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {{ end }}
+            </div>
+            {{ if .Header.LoggedInUser  }}
+            <div class="comment-form">
+                <p class="login-to">Leave a Comment</p>
+                <form action="/submit-comment" method="POST">
+                    <input type="hidden" name="postID" value="{{ .Post.PostID }}">
+                    <input type="text" id="comment" name="comment" placeholder="Your comment here ..." required> <br>
+                    <input type="submit" value="Submit" class="submit">
+                </form>
+            </div>
+            {{else}}
+            <div class="login-to">
+                <p>Login to leave your comment</p>
+            </div>
+            {{ end }}
+            
+        </div>
+    </div>
+
+    <script src="../static/scripts.js"></script>
+</body>
+</html>
+{{ end }}
